@@ -1,0 +1,3 @@
+Donal, password123, user
+Jamie, PassWord123, member
+Admin, admin, admin
