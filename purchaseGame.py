@@ -1,5 +1,7 @@
 import loadFiles
 import loadUser
+import discountFactory
+import calcDiscount
 
 def purchaseMenu(currentUser, userType):
     cart = []
@@ -46,24 +48,13 @@ def checkout(currentUser, userType, cart):
     print("Current items in cart")
     tempPrice = 0.0
     for obj in cart:
-        tempPrice = float(obj.pPrice)
-        if(userType == "member" or userType == "admin") and not obj.newRelease == "yes" and obj.genre == "teens":
-            print("Applying member discount of 25% for teens game")
-            tempPrice = tempPrice * 0.75
-        elif(userType == "member" or userType == "admin") and not obj.newRelease == "yes" and obj.genre == "childrens":
-            print("Applying member discount of 35% for childrens game")
-            tempPrice = tempPrice * 0.65
-        elif(userType == "member" or userType == "admin") and obj.newRelease == "yes" and obj.genre == "teens":
-            print("Applying member discount of 15% for new teens game")
-            tempPrice = tempPrice * 0.85
-        elif(userType == "member" or userType == "admin") and not obj.newRelease == "yes" and obj.genre == "childrens":
-            print("Applying member discount of 25% for new childrens")
-            tempPrice = tempPrice * 0.75
-        if tempPrice == float(obj.pPrice):
-            print(obj.name, ", €", float(obj.pPrice), sep = '')
-        else:
-            print(obj.name, ", Original price €", obj.pPrice, ", Discounted Price €", tempPrice, sep = '')
-        price = price + tempPrice
+        discountFactory.discountFactory.name = obj.name
+        discountFactory.discountFactory.userType = userType
+        discountFactory.discountFactory.genre = obj.genre
+        discountFactory.discountFactory.newRelease = obj.newRelease
+        discountFactory.discountFactory.price = obj.pPrice
+        calcDiscount.calcDiscount()
+        price = price + float(discountFactory.discountFactory.totalDiscount)
     print ("Total price = €", price, sep = '')
     while menu2 == True:
         userInput = input("Would you like to procede with your purchase?\n")
