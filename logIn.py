@@ -4,8 +4,8 @@ def logIn():
     log = False
     loop = True
     i = 0
-        
-    while loop == True: 
+ 
+    while loop == True:
         if i < 3:
             usernameInput = input('Enter your username: ')
             passwordInput = input('Enter your password: ')
@@ -19,6 +19,6 @@ def logIn():
             if log == False:
                 print("login failed, check username and password, you have", 2 - i, "attempts left", sep =' ')
                 i += 1
-        else: 
+        else:
             loop = False
     return currentUser, passwordInput
