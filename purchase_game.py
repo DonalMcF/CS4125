@@ -3,45 +3,44 @@ import loadUser
 import discountFactory
 import calcDiscount
 
-def purchaseMenu(currentUser, userType):
+def purchase_menu(user_type):
     cart = []
     menu1 = True
     print()
-    for obj in loadFiles.gameLibrary:
+    for obj in load_files.game_library:
         print("Name:", obj.name, sep = ' ')
         print("Genre:", obj.genre, sep = ' ')
         print("Price: €", obj.pPrice, sep = '')
         print()
-    while menu1 == True:
-        userInput = input("what game would you like to add to your account \nsay 'end' when finished\n")
-        if userInput == "end" and not cart:
+    while menu1 is True:
+        user_input = input("what game would you like to add to your account \nsay 'end' when finished\n")
+        if (user_input == "end") and not cart:
             print("Cart is empty, exiting store")
             menu1 = False
-        elif userInput == "end" and cart:
+        elif user_input == "end" and cart:
             print("Proceding to checkout")
-            checkout(currentUser, userType, cart)
+            checkout(user_type, cart)
             menu1 = False
         else:
             check = len(cart)
             check2 = False
             check3 = False
-            for obj2 in loadUser.userLibrary:
-                    if userInput == obj2.name:
-                        check2 = True
-            if check2 == True:
+            for obj2 in load_user.user_library:
+                if user_input == obj2.name:
+                    check2 = True
+            if check2 is True:
                 print("You already own that game")
             for obj3 in cart:
-                if userInput == obj3.name:
+                if user_input == obj3.name:
                     check3 = True
-            if check3 == True:
-                print("That game is already in your cart")        
-            for obj in loadFiles.gameLibrary:
-                if userInput == obj.name and check2 == False and check3 == False:
+            if check3 is True:
+                print("That game is already in your cart")
+            for obj in load_files.game_library:
+                if user_input == obj.name and check2 is False and check3 is False:
                     cart.append(obj)
                     print("Game added to cart")
-            if check == len(cart) and check2 == False and check3 == False:
+            if check == len(cart) and check2 is False and check3 is False:
                 print("Not a valid selection")
-        
 def checkout(currentUser, userType, cart):
     menu2 = True
     price = 0.0
@@ -56,14 +55,14 @@ def checkout(currentUser, userType, cart):
         calcDiscount.calcDiscount()
         price = price + float(discountFactory.discountFactory.totalDiscount)
     print ("Total price = €", price, sep = '')
-    while menu2 == True:
-        userInput = input("Would you like to procede with your purchase?\n")
-        if userInput.lower() == "yes" or userInput.lower() == "y":
+    while menu2 is True:
+        user_input = input("Would you like to procede with your purchase?\n")
+        if user_input.lower() == "yes" or user_input.lower() == "y":
             print("Please input card details")
             print("Thank you for your purchase")
-            loadUser.userLibrary = loadUser.userLibrary + cart
+            load_user.user_library = load_user.user_library + cart
             menu2 = False
-        elif userInput.lower() == "no" or userInput.lower() == "n":
+        elif user_input.lower() == "no" or user_input.lower() == "n":
             print("cancelling order")
             menu2 = False
         else:
