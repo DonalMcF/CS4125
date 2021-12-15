@@ -1,5 +1,5 @@
 class discountFactory:
-    def __init__(name, userType, genre, newRelease, price, totalDiscount):
+    def __init__(self, name, userType, genre, newRelease, price, totalDiscount):
         self.name = name
         self.userType = userType
         self.genre = genre
