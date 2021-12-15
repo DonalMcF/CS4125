@@ -1,79 +1,79 @@
-import loadFiles 
-import loadUser
-import logIn
+import load_files 
+import load_user
+import log_in
 import register
-import purchaseGame
-import rentGame
-import addGame
+import purchase_game
+import rent_game
+import add_game
 
-userType = ""
-userRental = ""
+user_type = ""
+user_rental = ""
 
 print("New releases this week")
-for obj in loadFiles.gameLibrary:
-    if obj.newRelease == "yes":
+for obj in load_files.game_library:
+    if obj.new_release == "yes":
         print(obj.name)
 print("\n")
 
 menu1 = True
 while menu1 == True:
-    userInput = input("What would you like to do? \n1) Register an account\n2) Log in\n3) Exit\n")
-    if userInput == "1":
+    user_input = input("What would you like to do? \n1) Register an account\n2) Log in\n3) Exit\n")
+    if user_input == "1":
         register.register()
-    elif userInput == "2":
-        currentUser, currentPassword = logIn.logIn()
-        if currentUser:
-            print("Welcome,", currentUser, sep = ' ')
-            for obj in loadFiles.accounts:
-                if currentUser == obj.name:
-                    userType = obj.accountType
-                    userRental = loadUser.loadUser(currentUser)
+    elif user_input == "2":
+        current_user, current_password = log_in.log_in()
+        if current_user:
+            print("Welcome,", current_user, sep = ' ')
+            for obj in load_files.accounts:
+                if current_user == obj.name:
+                    user_type = obj.account_type
+                    user_rental = load_user.load_user(current_user)
                     menu2 = True 
                     while menu2 == True:
-                        if userType == "user":
-                            userInput = input("What would you like to do? \n1) Purchase game\n2) Subscribe to membership\n3) Log out\n")
-                        elif userType == "member":
-                            userInput = input("What would you like to do? \n1) Purchase game\n2) Cancel membership\n3) Rent Game\n4) Return Game\n5) Log out\n")
-                        elif userType == "admin":
-                            userInput = input("What would you like to do? \n1) Purchase game\n2) Add game\n3) Log out\n")
+                        if user_type == "user":
+                            user_input = input("What would you like to do? \n1) Purchase game\n2) Subscribe to membership\n3) Log out\n")
+                        elif user_type == "member":
+                            user_input = input("What would you like to do? \n1) Purchase game\n2) Cancel membership\n3) Rent Game\n4) Return Game\n5) Log out\n")
+                        elif user_type == "admin":
+                            user_input = input("What would you like to do? \n1) Purchase game\n2) Add game\n3) Log out\n")
                   
                         #user commands
-                        if userInput == "1":
-                            purchaseGame.purchaseMenu(currentUser, userType)
-                            loadUser.updateUser(currentUser)
-                        elif userInput == "2" and (userType == "user" or userType == "member"):
-                            userType = loadFiles.updateMembership(currentUser, userType)
-                        elif userInput == "3" and userType == "user":
-                            print("Goodbye", currentUser, sep = ' ')
+                        if user_input == "1":
+                            purchase_game.purchase_menu(user_type)
+                            load_user.update_user(current_user)
+                        elif user_input == "2" and (user_type == "user" or user_type == "member"):
+                            user_type = load_files.update_membership(current_user, user_type)
+                        elif user_input == "3" and user_type == "user":
+                            print("Goodbye", current_user, sep = ' ')
                             menu2 = False
                       
                         #member commands
-                        elif userInput == "3" and userType == "member":
-                            userRental = rentGame.rentGame(userRental)
-                            loadUser.updateUserRent(currentUser, userRental)
-                        elif userInput == "4" and userType == "member":
-                            userRental = rentGame.returnGame(userRental)
-                            loadUser.updateUserRent(currentUser, userRental)
-                        elif userInput == "5" and userType == "member":
-                            print("Goodbye", currentUser, sep = ' ')
+                        elif user_input == "3" and user_type == "member":
+                            user_rental = rent_game.rent_game(user_rental)
+                            load_user.update_user_rent(current_user, user_rental)
+                        elif user_input == "4" and user_type == "member":
+                            user_rental = rent_game.return_game(user_rental)
+                            load_user.update_user_rent(current_user, user_rental)
+                        elif user_input == "5" and user_type == "member":
+                            print("Goodbye", current_user, sep = ' ')
                             menu2 = False
                                     
                         #admin commands
-                        elif userInput == "2" and userType == "admin":
-                            addGame.addGame()
-                        elif userInput == "3" and userType == "admin":
-                            print("Goodbye", currentUser, sep = ' ')
-                            currentUser = ""
-                            currentPassword = ""
-                            userType = ""
-                            userRental = ""
-                            loadUser.userLibrary.clear()
+                        elif user_input == "2" and user_type == "admin":
+                            add_game.add_game()
+                        elif user_input == "3" and user_type == "admin":
+                            print("Goodbye", current_user, sep = ' ')
+                            current_user = ""
+                            current_password = ""
+                            user_type = ""
+                            user_rental = ""
+                            load_user.user_library.clear()
                             menu2 = False
                                     
                         else:
                             print("invalid input, please select the number of the action you wish to take")
 
-    elif userInput == "3":
+    elif user_input == "3":
         menu1 = False
     else:
         print("invalid input, please select the number of the action you wish to take")
