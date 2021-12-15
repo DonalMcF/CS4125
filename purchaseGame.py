@@ -48,13 +48,13 @@ def checkout(currentUser, userType, cart):
     print("Current items in cart")
     tempPrice = 0.0
     for obj in cart:
-        discountFactory.discountFactory.name = obj.name
-        discountFactory.discountFactory.userType = userType
-        discountFactory.discountFactory.genre = obj.genre
-        discountFactory.discountFactory.newRelease = obj.newRelease
-        discountFactory.discountFactory.price = obj.pPrice
+        discountFactory.discountFactory.setName(obj.name)
+        discountFactory.discountFactory.setUserType(userType)
+        discountFactory.discountFactory.setGenre(obj.genre)
+        discountFactory.discountFactory.setNewRelease(obj.newRelease)
+        discountFactory.discountFactory.setPrice(obj.pPrice)
         calcDiscount.calcDiscount()
-        price = price + float(discountFactory.discountFactory.totalDiscount)
+        price = price + float(discountFactory.discountFactory.getTotalDiscount())
     print ("Total price = €", price, sep = '')
     while menu2 == True:
         userInput = input("Would you like to procede with your purchase?\n")

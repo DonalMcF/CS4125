@@ -1,12 +1,14 @@
 import discountFactory
 def calcDiscount():
-    tempName = discountFactory.discountFactory.name
-    tempUserType = discountFactory.discountFactory.userType
-    tempGenre = discountFactory.discountFactory.genre
-    tempNewRelease = discountFactory.discountFactory.newRelease
-    tempPrice = float(discountFactory.discountFactory.price)
+    tempName = discountFactory.discountFactory.getName()
+    tempUserType = discountFactory.discountFactory.getUserType()
+    tempGenre = discountFactory.discountFactory.getGenre()
+    tempNewRelease = discountFactory.discountFactory.getNewRelease()
+    tempPrice = float(discountFactory.discountFactory.getPrice())
     tempDiscount = 0.0
-    if(tempUserType == "member" or tempUserType == "admin") and not tempNewRelease == "yes" and tempGenre == "teens":
+    if(tempUserType == "user"):
+        tempDiscount = tempPrice
+    elif(tempUserType == "member" or tempUserType == "admin") and not tempNewRelease == "yes" and tempGenre == "teens":
         print("Applying member discount of 25% for teens game")
         tempDiscount = tempPrice * 0.75
     elif(tempUserType == "member" or tempUserType == "admin") and not tempNewRelease == "yes" and tempGenre == "childrens":
@@ -23,4 +25,4 @@ def calcDiscount():
         
     else:
         print(tempName, ", Original price €", tempPrice, ", Discounted Price €", tempDiscount, sep = '')
-    discountFactory.discountFactory.totalDiscount = tempDiscount
+    discountFactory.discountFactory.setTotalDiscount(tempDiscount)
