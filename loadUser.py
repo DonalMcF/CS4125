@@ -1,55 +1,51 @@
-userLibrary = []
-class userLibraryFormat:
-    def __init__(self, name, genre, newRelease, pPrice):
+user_library = []
+class user_library_format:
+    def __init__(self, name, genre, new_release, p_price):
         self.name = name
         self.genre = genre
-        self.newRelease = newRelease
-        self.pPrice = pPrice
+        self.new_release = new_release
+        self.p_price = p_price
 
-def loadUser(currentUser):
+def load_user(current_user):
     try:
-        filename = currentUser + "Library.txt"
-        with open(filename,'r') as f:
-            textlines = f.readlines()
-    
-            for i in textlines:
+        file_name = current_user + "Library.txt"
+        with open(file_name,'r') as fi_o:
+            text_lines = fi_o.read_lines()
+            for i in text_lines:
                 line = i.split(", ")
-                userLibrary.append(userLibraryFormat(line[0],line[1],line[2],line[3].replace("\n","")))
-            f.close()
+                user_library.append(user_library_format(line[0],line[1],line[2],line[3].replace("\n","")))
+            fi_o.close()
     except:
-        filename = currentUser + "Library.txt"
-        outF = open(filename, 'w')
-        outF.close()
-    
+        file_name = current_user + "Library.txt"
+        out_f = open(file_name, 'w')
+        out_f.close()
     try:
-        filename = currentUser + "Rental.txt"
-        with open(filename,'r') as f:
-            textlines = f.readlines()
-            userRental = textlines[0].replace("\n","")
-            return userRental
-            f.close() 
+        file_name = current_user + "Rental.txt"
+        with open(file_name,'r') as fi_o:
+            text_lines = fi_o.read_lines()
+            user_rental = text_lines[0].replace("\n","")
+            return user_rental
     except:
-        filename = currentUser + "Rental.txt"
-        outF = open(filename, 'w')
-        outF.close()
-    
-def updateUser(currentUser):
-    filename = currentUser + "Library.txt"
-    outF = open(filename, 'w')
-    linenumber = len(userLibrary)
+        file_name = current_user + "Rental.txt"
+        out_f = open(file_name, 'w')
+        out_f.close()
+def update_user(current_user):
+    file_name = current_user + "Library.txt"
+    out_f = open(file_name, 'w')
     i = 0
-    for obj in userLibrary:
+    for obj in user_library:
         i = i + 1
-        if i == len(userLibrary):
-            newline = obj.name + ", " + obj.genre + ", " + obj.newRelease + ", " + obj.pPrice
-            outF.write(newline)
+        if i == len(user_library):
+            new_line = obj.name + ", " + obj.genre + ", " + obj.new_release + ", " + obj.p_price
+            out_f.write(new_line)
         else:
-            newline = newline = obj.name + ", " + obj.genre + ", " + obj.newRelease + ", " + obj.pPrice + "\n"
-            outF.write(newline)
-    outF.close()
+            new_line = new_line = obj.name + ", "
+            + obj.genre + ", " + obj.new_release + ", " + obj.p_price + "\n"
+            out_f.write(new_line)
 
-def updateUserRent(currentUser, userRental):
-    filename = currentUser + "Rental.txt"
-    outF = open(filename, 'w')
-    outF.write(userRental)
-    outF.close()
+def update_user_rent(current_user, user_rental):
+    file_name = current_user + "Rental.txt"
+    out_f = open(file_name, 'w')
+    out_f.write(user_rental)
+    out_f.close()
+    
