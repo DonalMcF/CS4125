@@ -1,5 +1,5 @@
 accounts = []
-gameLibrary = []
+game_library = []
 Observables = []
 
 class Observer:
@@ -14,9 +14,6 @@ class Observer:
         **kwargs
         ):
         print ('Got', args, kwargs, 'From', observable)
-    
-        
-    
 class Observable:
 
     def __init__(self):
@@ -32,77 +29,70 @@ class Observable:
     def unsubscribe(self, observer):
         self._observers.remove(observer)
 
-class accountsFormat:
-    def __init__(self, name, password, accountType):
+class accounts_format:
+    def __init__(self, name, password, account_type):
         self.name = name
         self.password = password
-        self.accountType = accountType
-        
-
-class gameLibraryFormat:
-    def __init__(self, name, genre, newRelease, pPrice):
+        self.account_type = account_type
+class game_library_format:
+    def __init__(self, name, genre, new_release, p_price):
         self.name = name
         self.genre = genre
-        self.newRelease = newRelease
-        self.pPrice = pPrice
+        self.new_release = new_release
+        self.p_price = p_price
 
 with open('accounts.txt','r') as f:
     textlines = f.readlines()
-    
     for i in textlines:
         line = i.split(", ")
-        accounts.append(accountsFormat(line[0],line[1],line[2].replace("\n","")))
-    f.close()    
+        accounts.append(accounts_format(line[0],line[1],line[2].replace("\n","")))
+    f.close()
 
 with open('gameLibrary.txt','r') as f:
     textlines = f.readlines()
-    
     for i in textlines:
         line = i.split(", ")
-        gameLibrary.append(gameLibraryFormat(line[0],line[1],line[2],line[3].replace("\n","")))
-    f.close() 
-    
-def updateMembership(currentUser, userType):
-    if userType == "user":
-        userType = "member"
-        outF = open('accounts.txt', 'w')
-        linenumber = len(accounts)
+        game_library.append(game_library_format(line[0],line[1],line[2],line[3].replace("\n","")))
+    f.close()
+def update_membership(current_user, user_type):
+    if user_type == "user":
+        user_type = "member"
+        out_f = open('accounts.txt', 'w')
         i = 0
         for obj in accounts:
             i = i + 1
-            if currentUser == obj.name and i == len(accounts):
+            if current_user == obj.name and i == len(accounts):
                 newline = obj.name + ", " + obj.password + ", member"
-                outF.write(newline)
-            elif currentUser != obj.name and i == len(accounts):
+                out_f.write(newline)
+            elif current_user != obj.name and i == len(accounts):
                 newline = obj.name + ", " + obj.password + ", " + obj.accountType
-                outF.write(newline)
-            elif currentUser == obj.name:
+                out_f.write(newline)
+            elif current_user == obj.name:
                 newline = obj.name + ", " + obj.password + ", member\n"
-                outF.write(newline)
+                out_f.write(newline)
             else:
                 newline = obj.name + ", " + obj.password + ", " + obj.accountType + "\n"
-                outF.write(newline)
-        outF.close()
-        userType = "member"
-        
-    elif userType == "member":
-        outF = open('accounts.txt', 'w')
-        linenumber = len(accounts)
+                out_f.write(newline)
+        out_f.close()
+        user_type = "member"
+    elif user_type == "member":
+        out_f = open('accounts.txt', 'w')
+        line_number = len(accounts)
         i = 0
         for obj in accounts:
             i = i + 1
-            if currentUser == obj.name and i == len(accounts):
+            if current_user == obj.name and i == len(accounts):
                 newline = obj.name + ", " + obj.password + ", user"
-                outF.write(newline)
-            elif currentUser != obj.name and i == len(accounts):
+                out_f.write(newline)
+            elif current_user != obj.name and i == len(accounts):
                 newline = obj.name + ", " + obj.password + ", " + obj.accountType
-                outF.write(newline)
-            elif currentUser == obj.name:
+                out_f.write(newline)
+            elif current_user == obj.name:
                 newline = obj.name + ", " + obj.password + ", user\n"
-                outF.write(newline)
+                out_f.write(newline)
             else:
                 newline = obj.name + ", " + obj.password + ", " + obj.accountType + "\n"
-                outF.write(newline)
-        outF.close()
-        userType = "user"
-    return userType
+                out_f.write(newline)
+        out_f.close()
+        user_type = "user"
+    return user_type
