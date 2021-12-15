@@ -2,12 +2,14 @@ import load_files
 def register():
     loop = True
     check = False
+    output = ""
     while loop is True:
         check = False
         username_input = input('Choose a username\n')
         for obj in load_files.accounts:
             if obj.name == username_input:
-                print("Username has been taken, please select another")
+                output = "Username has been taken, please select another"
+                print(output)
                 check = True
         if check is False:
             loop = False

@@ -1,3 +1,2 @@
-Donal, password123, user
-Jamie, PassWord123, member
-Admin, admin, admin
+dat, datguy, member
+jaji, jajib, user
