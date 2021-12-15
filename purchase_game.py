@@ -1,7 +1,7 @@
-import loadFiles
-import loadUser
-import discountFactory
-import calcDiscount
+import load_files
+import load_user
+import discount_factory
+import calc_discount
 
 def purchase_menu(user_type):
     cart = []
@@ -10,7 +10,7 @@ def purchase_menu(user_type):
     for obj in load_files.game_library:
         print("Name:", obj.name, sep = ' ')
         print("Genre:", obj.genre, sep = ' ')
-        print("Price: €", obj.pPrice, sep = '')
+        print("Price: €", obj.p_price, sep = '')
         print()
     while menu1 is True:
         user_input = input("what game would you like to add to your account \nsay 'end' when finished\n")
@@ -47,7 +47,7 @@ def checkout(user_type, cart):
     print("Current items in cart")
     for obj in cart:
         discount_factory.discount_factory.name = obj.name
-        discount_factory.discount_factory.userType = user_type
+        discount_factory.discount_factory.user_type = user_type
         discount_factory.discount_factory.genre = obj.genre
         discount_factory.discount_factory.load_release = obj.new_release
         discount_factory.discount_factory.price = obj.p_price
