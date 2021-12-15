@@ -41,19 +41,18 @@ def purchase_menu(user_type):
                     print("Game added to cart")
             if check == len(cart) and check2 is False and check3 is False:
                 print("Not a valid selection")
-def checkout(currentUser, userType, cart):
+def checkout(user_type, cart):
     menu2 = True
     price = 0.0
     print("Current items in cart")
-    tempPrice = 0.0
     for obj in cart:
-        discountFactory.discountFactory.name = obj.name
-        discountFactory.discountFactory.userType = userType
-        discountFactory.discountFactory.genre = obj.genre
-        discountFactory.discountFactory.newRelease = obj.newRelease
-        discountFactory.discountFactory.price = obj.pPrice
-        calcDiscount.calcDiscount()
-        price = price + float(discountFactory.discountFactory.totalDiscount)
+        discount_factory.discount_factory.name = obj.name
+        discount_factory.discount_factory.userType = user_type
+        discount_factory.discount_factory.genre = obj.genre
+        discount_factory.discount_factory.load_release = obj.new_release
+        discount_factory.discount_factory.price = obj.p_price
+        calc_discount.calc_discount()
+        price = price + float(discount_factory.discount_factory.total_discount)
     print ("Total price = €", price, sep = '')
     while menu2 is True:
         user_input = input("Would you like to procede with your purchase?\n")
