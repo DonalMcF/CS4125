@@ -1,8 +1,8 @@
-class discountFactory:
-    def __init__(name, userType, genre, newRelease, price, totalDiscount):
+class discount_factory:
+    def __init__(name, user_type, genre, new_release, price, total_discount):
         self.name = name
-        self.userType = userType
+        self.user_type = user_type
         self.genre = genre
-        self.newRelease = newRelease
+        self.new_release = new_release
         self.price = price
-        self.totalDiscount = totalDiscount 
+        self.total_discount = total_discount
